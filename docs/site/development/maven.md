@@ -97,6 +97,14 @@ mvn test '-Dorg.unicode.cldr.unittest.testArgs=-f:TestUntimedCounter -n -q'
          '-Dorg.unicode.cldr.unittest.web.testArgs=-f:TestMisc -n -q'
 ```
 
+**Checking out the CLDR Archive**
+
+Running ```mvn package``` will show errors because the CLDR archive directory does not exist.
+
+Running ```mvn package -DHAS_CLDR_ARCHIVE=false``` will skip the tests that depend on the archives.
+
+Otherwise, visit [Checking out the CLDR Archive](https://cldr.unicode.org/development/creating-the-archive) for instructions on setting up the archive.
+
 **Peter's version:**
 
 To run ConsoleCheck for say a specific locale like "fr", I might do (from the top of the CLDR directory):
