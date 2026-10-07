@@ -42,15 +42,24 @@ MYSQL_PORT=3306
 MYSQL_HOST=localhost
 ```
 
+- Run `mvn --file=tools/pom.xml -DskipTests=true -pl cldr-code,cldr-rdf -am install` to install dependencies before starting the development web server for the first time.
+
 - Use `mvn --file=tools/pom.xml -DskipTests=true -pl cldr-apps liberty:dev` to run a development
   web server, listening on port 9080. Hit control-C to cancel the server.
 
 - Navigate to http://localhost:9080/cldr-apps to view the app
 
-- See [Configuration](#configuration) below. You will need to restart the server after edit.
+- In order for changes to the frontend to be reloaded live, run `npm run watch` in `tools/cldr-apps/js`.
 
-See <https://cldr.unicode.org/development/running-survey-tool> for out of date information
-about the Survey Tool.
+- See [Configuration](#configuration) below. You will need to modify the configuration file and restart the server afterwards.
+
+#### Logging in as Admin
+
+The admin account can be logged into in development with the following username and password.
+
+- username: admin@
+- password: the value of `CLDR_VAP` from `cldr.properties` (see [Configuration](#configuration))
+
 
 ## Using Logging
 
@@ -126,10 +135,11 @@ CLDR_MAIL_DELAY_BATCH_ITEM=0
 
 ### Configuration
 
-SurveyTool is configured with a `cldr.properties` file which is created on first startup. It must be edited before
-SurveyTool can start working, to remove the `CLDR_MAINTENANCE=true` line.
+SurveyTool is configured with a `cldr.properties` file which is created on first startup. It must be edited before SurveyTool can start working, to remove the `CLDR_MAINTENANCE=true` line.
 
 You will also likely want to change the `CLDR_DIR` property in that file to point to your CLDR root, otherwise a new CLDR root will be checked out.
+
+To prevent errors, you will also need to provide the `CLDR_OLDVERSION` and `CLDR_NEWVERSION`.
 
 Search for this file in your Java workspace after launching - it may be in a random place. See [Advanced Configuration](#advanced-configuration) below for how to move this directory. On one system the cldr directory was in `tools/cldr-apps/target/liberty/wlp/usr/servers/cldr/cldr`. On the production and staging servers, the location is `/srv/st/config`
 
@@ -143,7 +153,7 @@ Search for this file in your Java workspace after launching - it may be in a ran
 org.unicode.cldr.util.CLDRConfigImpl.cldrHome=/Users/srl295/src/cldr-st/config
 ```
 
-You will also want to make sure this directory exists and is writeable. You can move the existing `cldr.properties` and other files to that directory.
+You will also want to make sure this directory exists and is writeable. You will need to move the existing `cldr.properties` and other files to that directory. The development server must be run at least once with the default configuration location to create these files.
 
 ## Docker Testing
 
