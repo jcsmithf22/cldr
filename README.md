@@ -31,7 +31,7 @@ including the data files and LDML specification associated with each release
 - [Repository organization](https://cldr.unicode.org/index/downloads#Repository_Organization "CLDR Download Page, Repository Organization"),
 describing the organization of files within this repository
 
-- [Building and running CLDR Tools](https://cldr.unicode.org/development/cldr-tools "CLDR Tools Page")
+- [CLDR development documentation]("https://cldr.unicode.org/development/cldr-development-site")
 
 ### Contributing
 
